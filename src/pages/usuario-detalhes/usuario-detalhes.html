@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>
+      {{nivel}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12>
+          <ion-avatar item-start style="font-size: x-small;">
+            <img   style="width: 200px; height: 200px; margin-left:43px;" *ngIf="genero != 'Masculino'" src="../../assets/imgs/fem.jpg">
+            <img  style="width: 200px; height: 200px;  margin-left:43px;" *ngIf="genero == 'Masculino'" src="../../assets/imgs/masculino.png">
+          </ion-avatar>
+        </ion-col>
+        <ion-col col-12>
+          {{nome}} {{sobrenome}}
+        </ion-col>
+
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-4>
+          {{telefone}}
+        </ion-col>
+
+        <ion-col col-8>
+          {{email}}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-4>
+          {{endereco}}
+        </ion-col>
+        <ion-col col-4>
+          {{numero}}
+        </ion-col>
+        <ion-col col-4>
+          {{bairro}}
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-6>
+           {{cidade}} 
+          </ion-col>
+
+          <ion-col col-6>
+            {{estado}}
+           </ion-col>
+    
+          </ion-row>
+
+      
+    </ion-grid>
+  </ion-card>
+</ion-content>

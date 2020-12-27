@@ -1,0 +1,54 @@
+<ion-header no-border>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Minhas Compras</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content style="margin-top: 20px;">
+  <ion-list>
+    <ion-item-sliding *ngFor="let item of cart.items;let i = index">
+      <ion-item>
+        <ion-thumbnail item-start navPush="ProductDetail" [navParams]="{product: item.id}">
+          <img *ngIf="item.foto == null" src="../../assets/imgs/sem-img.png">
+          <img *ngIf="item.foto != null" src="{{url+item.foto}}">
+        </ion-thumbnail>
+        <h2 [innerHTML]="item.nome"></h2>
+        
+      
+        <button class="ion-button2" item-end ion-button color="dark" >{{item.valor_venda | currency: 'BRL'}}</button>
+
+
+        <ion-icon class="noBackSpace"  color="danger" slot="start" name="md-remove-circle" (click)="menos(item)"></ion-icon>
+        
+        <p class="noBackSpace">{{item.qtd}}</p>
+        <ion-icon  color="secondary" slot="start" name="md-add-circle" (click)="mais(item)"></ion-icon>
+        <p style="color: rgb(6, 117, 15);" *ngIf="item.total != ''" >Valor UNI: {{item.valor_venda | currency: 'BRL'}}</p>
+        
+      </ion-item>
+    
+      <ion-item-options side="right">
+        <button ion-button color="primary" (click)="removeItem(index)">
+          <ion-icon name="trash"></ion-icon>
+          Excluir
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+    <ion-item>
+
+      <button class="ion-button3" item-end ion-button color="danger" >Total: {{cart.total | currency: 'BRL'}}</button>
+      
+    </ion-item>
+    
+  </ion-list>
+  
+
+  <ion-footer no-border>
+  
+      <button class="ion-button" ion-button color="primary" full navPush="CheckoutPage">Checkout</button>
+  
+  </ion-footer>
+</ion-content>
+

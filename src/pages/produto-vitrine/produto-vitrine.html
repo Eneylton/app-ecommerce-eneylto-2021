@@ -1,0 +1,68 @@
+<ion-header no-border>
+  <ion-navbar transparent>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title *ngIf="!isSearchbarOpened" (click)="isSearchbarOpened=true">Catálogo</ion-title>
+
+    <ion-searchbar placeholder="Pesquisar" *ngIf="isSearchbarOpened" showCancelButton="true" 
+                   (ionCancel)="isSearchbarOpened=false"
+                   (ionInput)="getProdutos($event)">
+                   </ion-searchbar>
+    <ion-buttons end>
+
+      <button ion-button icon-only *ngIf="!isSearchbarOpened" (click)="isSearchbarOpened=true">
+
+        <ion-icon name="search"></ion-icon>
+      </button>
+
+      <button ion-button icon-only clear navPush="MyCartPage" *ngIf="!isSearchbarOpened" (click)="isSearchbarOpened=true">
+        <ion-icon name="basket" color="secondary"></ion-icon>
+        <ion-badge id="notifications-badge" color="danger">{{cart.carrinhoTotal}}</ion-badge> 
+    </button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-row [virtualScroll]="produtos">
+      <ion-col col-6 *virtualItem="let item">
+       
+        <ion-card (click)="addItem(item)">
+          <img class="img" *ngIf="item.foto == null" src="../../assets/imgs/sem-img.png">
+          <img class="img" *ngIf="item.foto != null" src="{{url+item.foto}}">
+          <ion-card-content>
+          
+              <ion-row>
+                <ion-col col-12>
+                  <h3 style="font-weight: 600;">{{item.nome}}</h3>
+                  <hr>
+                </ion-col>
+            
+                  <ion-col col-12>
+                   <span style="font-size: small;">{{ item.valor_venda | currency: 'BRL'}}</span>
+                  </ion-col>
+                  <ion-col col-12>
+                    <ion-badge [color]="item.estoque >= 4 ? 'dark' : 'danger'"  mode="ios">
+                      <span style="font-size: small;">
+                      Estoque: {{item.estoque}}
+                    
+                      </span>
+
+                  </ion-badge>
+                   </ion-col>
+              </ion-row>
+        
+          </ion-card-content>
+        </ion-card>
+      
+      </ion-col>
+    </ion-row>
+
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)"  >
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="CARREGANDO...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

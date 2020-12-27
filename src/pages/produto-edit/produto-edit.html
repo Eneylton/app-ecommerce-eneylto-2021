@@ -1,0 +1,91 @@
+<ion-header  no-border>
+  <ion-navbar transparent>
+    <ion-title>Produtos</ion-title>
+    <ion-buttons end>
+
+      <button ion-button icon-only (click)="editar()">
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col col-3>
+        <ion-thumbnail item-start>
+          <img src="{{url+foto}}" *ngIf="base64Image == ''" >
+          <img src="{{base64Image}}" *ngIf="base64Image != ''">
+
+        </ion-thumbnail>
+
+      </ion-col>
+      <ion-col col-9>
+
+        <div>
+          <button ion-button block (click)="presentActionSheet()" color="danger">Upload</button>
+        </div>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row>
+      <ion-col col-4>
+
+        <div class="inputWithIcon">
+          <input type="text" placeholder="Código" [(ngModel)]="codigo">
+
+        </div>
+
+      </ion-col>
+      <ion-col col-6>
+
+        <div class="inputWithIcon">
+          <input *ngIf="scanerData.text !=''" type="text" placeholder="Barras" [(ngModel)]="barra">
+          <input *ngIf="scanerData.text ==''" type="text" placeholder="Barras" [(ngModel)]="scanerData.text">
+        
+
+        </div>
+
+
+      </ion-col>
+      <ion-col col-2>
+
+        <button  style="margin-top: 8px;" ion-button block (click)="scan()" color="secondary">
+          <ion-icon style="font-size:25px;" name="ios-barcode-outline"></ion-icon>
+        </button>
+
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-12>
+        <input type="text" placeholder="Nome" [(ngModel)]="nome">
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+
+      <ion-col col-4>
+        <input type="text" placeholder="Qtd" [(ngModel)]="estoque">
+      </ion-col>
+
+      <ion-col col-4>
+        <input type="text" placeholder="Compra" [(ngModel)]="valor_compra">
+      </ion-col>
+
+      <ion-col col-4>
+        <input type="text" placeholder="Venda" [(ngModel)]="valor_venda">
+      </ion-col>
+
+      </ion-row>
+
+
+  </ion-grid>
+
+
+
+
+</ion-content>

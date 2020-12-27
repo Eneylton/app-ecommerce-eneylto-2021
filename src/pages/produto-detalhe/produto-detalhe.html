@@ -1,0 +1,34 @@
+<ion-header no-border>
+  <ion-navbar transparent>
+    <ion-title>{{nome}}</ion-title>
+    <ion-buttons end>
+
+      <button ion-button color="secondary" outline> <ion-icon name='share-alt'></ion-icon>
+        {{valor_venda | currency: 'BRL'}}
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="cards-bg">
+
+  <ion-card>
+
+    <img style="height: 340px;" src="{{url+foto}}" *ngIf="base64Image == ''" >
+    <img style="height: 340px;" src="{{base64Image}}" *ngIf="base64Image != ''">
+
+    <ion-row no-padding>
+      <ion-col>
+       
+        <button ion-button color="secondary" outline>Em estoque: {{estoque}}</button>
+      
+      </ion-col>
+     
+      <ion-col text-right>
+        <span class="texto">{{barra}}</span>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+
+</ion-content>

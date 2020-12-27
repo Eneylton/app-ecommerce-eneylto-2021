@@ -1,0 +1,96 @@
+<ion-header no-border>
+  <ion-navbar transparent>
+    <button ion-button menuToggle>
+      <ion-icon name="menu" class="cor"></ion-icon>
+    </button>
+    <ion-title *ngIf="!isSearchbarOpened" (click)="isSearchbarOpened=true">Produtos</ion-title>
+
+    <ion-searchbar placeholder="Pesquisar" *ngIf="isSearchbarOpened" showCancelButton="true"
+      (ionCancel)="isSearchbarOpened=false" (ionInput)="getProdutos($event)">
+    </ion-searchbar>
+    <ion-buttons end>
+
+      <button ion-button icon-only *ngIf="!isSearchbarOpened" (click)="isSearchbarOpened=true">
+
+        <ion-icon class="cor2" name="search"></ion-icon>
+      </button>
+
+      <button ion-button icon-only (click)="adicionar()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+
+  <ion-list style="margin-top: 20px;" [virtualScroll]="produtos" >
+
+    
+
+    <ion-item-sliding *virtualItem="let item" >
+      <ion-item-options side="left">
+        <button ion-button color="primary" (click)="detalhe(
+          item.id,         
+          item.codigo,
+          item.barra,
+          item.nome,
+          item.qtd,
+          item.estoque,
+          item.valor_compra,
+          item.valor_venda,
+          item.foto
+                )">
+          <ion-icon name="text"></ion-icon>
+          Detalhes
+        </button>
+      
+      </ion-item-options>
+      <ion-item>
+      <ion-thumbnail item-start>
+      
+          <img *ngIf="item.foto == null" src="../../assets/imgs/sem-img.png">
+          <img *ngIf="item.foto != null" src="{{url+item.foto}}">
+    
+      </ion-thumbnail>
+      
+      <h2 style="font-size: 12px; text-transform:uppercase">{{item.nome}}</h2>
+     
+     
+      <h3 style="font-size: 12px; color: rgba(255, 217, 0, 0.856); font-weight: 600;">{{item.valor_venda | currency: 'BRL'}}</h3>
+      <button ion-button color="laranja" outline><span style="font-size: xx-small;">EM ESTOQUE: {{item.estoque}} • COD: {{item.codigo}} </span></button>
+      <button ion-button clear item-end><ion-icon style="font-size: 26px;" name="ios-arrow-forward"></ion-icon></button>
+    </ion-item>
+
+    <ion-item-options side="rigth">
+      <button ion-button color="primary" (click)="editar(
+                                                          item.id,         
+                                                          item.codigo,
+                                                          item.barra,
+                                                          item.nome,
+                                                          item.qtd,
+                                                          item.estoque,
+                                                          item.valor_compra,
+                                                          item.valor_venda,
+                                                          item.foto
+                                                                )">
+        <ion-icon name="text"></ion-icon>
+        Editar
+      </button>
+      <button ion-button color="secondary">
+        <ion-icon name="call"></ion-icon>
+        Deletar
+      </button>
+    </ion-item-options>
+
+  </ion-item-sliding>
+  </ion-list>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="CARREGANDO...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

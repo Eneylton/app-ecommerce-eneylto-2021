@@ -1,0 +1,21 @@
+page-produto-detalhe {
+
+    .toolbar-title-md {
+  
+        color: #4beaff !important;
+    }
+
+    ion-content{
+        
+        //background-image: linear-gradient(to bottom, #051937, #002366, #002a95, #0029c2, #4b12eb);
+    
+        //background-image: linear-gradient(to bottom, #051937, #004d7a, #064fbd, #1b2655, #337ca7);
+        
+        background-image: linear-gradient(to bottom, #051937, #003b5e, #00607c, #00868d, #00ac8f);
+    }
+
+    .texto{
+        font-size: xx-large !important;
+        font-family: buda !important;
+    }
+}
